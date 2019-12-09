@@ -2,6 +2,7 @@ import time
 
 from wand_quiz import quiz, wand_cores, wand_flex
 
+
 def summarize_answers(answers):
 	questions = [1,2,3,4,5,5]
 	temp = answers[4].split(',')
@@ -32,16 +33,16 @@ def summarize_answers(answers):
 
 	flex = flex / 6
 
-	if(flex <= 1):
+	if flex <= 1:
 		flexes = wand_flex[1]
-	elif(flex <= 2):
+	elif flex <= 2:
 		flexes = wand_flex[2]
 	else:
 		flexes = wand_flex[3]
 
 	flex_temp = flex % 1
 
-	if(flex_temp == 0 and flex != 0):
+	if flex_temp == 0 and flex != 0:
 		flex_temp = flex - 0.0001
 		flex_temp = flex_temp % 1
 
@@ -75,7 +76,7 @@ def print_answers(flex, step, flexes, best, core, wood_dict):
 	print("---------------------")
 	print("Score: {}".format(flex))
 	print("Step: {}".format(step))
-	print("Potential flexibilites: {}".format(flexes))
+	print("Potential flexibilities: {}".format(flexes))
 	print("Best Fit: {}".format(best))
 	print()
 	print("---------------------")
@@ -119,7 +120,7 @@ if __name__ == "__main__":
 	print("Thank you, {}.".format(name))
 	time.sleep(3)
 	print("\n")
-	print("Please return this questionaire to an Ollivander's employee to begin the wand matching process.")
+	print("Please return this questionnaire to an Ollivander's employee to begin the wand matching process.")
 	print("\n")
 	time.sleep(3)
 	print("Your wand is waiting for you. Good luck.")

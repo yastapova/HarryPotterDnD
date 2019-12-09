@@ -1,4 +1,4 @@
-from wand_question_class import WandQuestion
+from question_classes import WandQuestion
 
 wand_cores = ["Unicorn Hair", "Dragon Heartstring", "Phoenix Feather"]
 wand_flex = {
@@ -6,7 +6,11 @@ wand_flex = {
 	2: ["Slightly Yielding", "Slightly Springy", "Fairly Bendy", "Reasonably Supple", "Very Flexible"],
 	3: ["Quite Bendy", "Supple", "Pliant", "Swishy", "Surprisingly Swishy", "Whippy"]
 }
-unique_woods = ["Acacia", "Alder", "Apple", "Ash", "Aspen", "Beech", "Black Walnut", "Blackthorn", "Cedar", "Cypress", "Dogwood", "Ebony", "Elm", "English Oak", "Fir", "Hawthorn", "Hazel", "Holly", "Hornbeam", "Larch", "Laurel", "Mahogany", "Maple", "Pear", "Pine", "Poplar", "Redwood", "Rowan", "Silver Lime", "Spruce", "Sycamore", "Vine", "Walnut", "Willow", "Yew"]
+unique_woods = ["Acacia", "Alder", "Apple", "Ash", "Aspen", "Beech", "Black Walnut", "Blackthorn",
+				"Cedar", "Cypress", "Dogwood", "Ebony", "Elm", "English Oak", "Fir", "Hawthorn",
+				"Hazel", "Holly", "Hornbeam", "Larch", "Laurel", "Mahogany", "Maple", "Pear", "Pine",
+				"Poplar", "Redwood", "Rowan", "Silver Lime", "Spruce", "Sycamore", "Vine", "Walnut",
+				"Willow", "Yew"]
 
 quiz = []
 
