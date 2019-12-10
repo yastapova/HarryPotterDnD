@@ -2,7 +2,7 @@ import itertools
 from collections import Counter
 
 from wand_quiz import wand_quiz, wand_cores, wand_flex, unique_woods
-from take_wand_quiz import summarize_wand
+from take_quiz import summarize_wand
 
 wand_flex_list = wand_flex[1] + wand_flex[2] + wand_flex[3]
 
