@@ -2,6 +2,7 @@ import time
 import random
 import re
 import numpy as np
+import argparse
 
 from wand_quiz import wand_quiz, wand_cores, wand_flex
 from sorting_quiz import houses, qtypes, tiebreaker, quiz_types
@@ -134,7 +135,6 @@ def take_wand_quiz():
     print_answers_wand(flex, step, flexes, best, core, wood_dict, name)
 # endregion
 
-
 # region Sorting
 def randomize_sort_quiz(n):
     random_quiz = []
@@ -167,12 +167,13 @@ def summarize_house(answers, take_quiz, allow_ties=False, print_text=True):
     max_points = totals.max()
 
     qfinal = np.array(answers[-1])
+    final_val = qfinal.max()
     qfinal = qfinal.argmax()  # which house they picked
 
     maxes = np.where(totals == max_points)  # indices of max values
     if np.shape(maxes)[1] > 1:
         # check if their preferred house is in the tie
-        if qfinal != 5 and bool(np.isin(qfinal, maxes)):
+        if final_val > 0 and bool(np.isin(qfinal, maxes)):
             # use their preference
             maxes = qfinal
 
@@ -182,7 +183,7 @@ def summarize_house(answers, take_quiz, allow_ties=False, print_text=True):
 
         else:
             # ask tiebreaker
-            if qfinal != 5 and print_text:
+            if final_val > 0 and print_text:
                 print(denial_msg)
                 time.sleep(3)
 
@@ -210,7 +211,7 @@ def summarize_house(answers, take_quiz, allow_ties=False, print_text=True):
                 maxes = maxes[0][0]
 
     else:
-        if qfinal != 5 and not bool(np.isin(qfinal, maxes) and print_text):
+        if final_val > 0 and (not bool(np.isin(qfinal, maxes)) and print_text):
             print(denial_msg)
 
         maxes = maxes[0][0]
@@ -296,5 +297,12 @@ def take_sorting_quiz(take_quiz):
 
 
 if __name__ == "__main__":
-    # take_wand_quiz()
-    start_sorting_quiz()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-q", "--quiz", help="choose quiz to take: wand or sorting", action="store")
+
+    args = parser.parse_args()
+
+    if args.quiz == "wand":
+        take_wand_quiz()
+    elif args.quiz == "sorting":
+        start_sorting_quiz()
