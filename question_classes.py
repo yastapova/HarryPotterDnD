@@ -24,3 +24,16 @@ class WandQuestion(Question):
 
 	def get_woods(self, answer):
 		return self.woods[answer]
+
+
+class SortingQuestion(Question):
+	def __init__(self, question, answers, house_scores, qtype):
+		self.house_scores = house_scores
+		self.qtype = qtype
+		super().__init__(question, answers)
+
+	def get_house_score(self, answer):
+		return self.house_scores[answer]
+
+	def get_qtype(self):
+		return self.qtype

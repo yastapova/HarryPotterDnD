@@ -12,7 +12,7 @@ unique_woods = ["Acacia", "Alder", "Apple", "Ash", "Aspen", "Beech", "Black Waln
 				"Poplar", "Redwood", "Rowan", "Silver Lime", "Spruce", "Sycamore", "Vine", "Walnut",
 				"Willow", "Yew"]
 
-quiz = []
+wand_quiz = []
 
 q1 = WandQuestion("Which of these do you value most?",
 	{
@@ -42,7 +42,7 @@ q1 = WandQuestion("Which of these do you value most?",
 	}
 )
 
-quiz.append(q1)
+wand_quiz.append(q1)
 
 q2 = WandQuestion("Do you like when things are easy, or do you prefer a challenge?",
 	{1: "Easy", 2: "Challenge"},
@@ -57,7 +57,7 @@ q2 = WandQuestion("Do you like when things are easy, or do you prefer a challeng
 	}
 )
 
-quiz.append(q2)
+wand_quiz.append(q2)
 
 q3 = WandQuestion("Do you follow the rules?",
 	{
@@ -81,7 +81,7 @@ q3 = WandQuestion("Do you follow the rules?",
 	}
 )
 
-quiz.append(q3)
+wand_quiz.append(q3)
 
 q4 = WandQuestion("Which of these would you rather be known for?",
 	{
@@ -114,7 +114,7 @@ q4 = WandQuestion("Which of these would you rather be known for?",
 	}
 )
 
-quiz.append(q4)
+wand_quiz.append(q4)
 
 q5 = WandQuestion("Which two words describe you best? (Enter answer like: 1, 2)",
 	{
@@ -153,4 +153,4 @@ q5 = WandQuestion("Which two words describe you best? (Enter answer like: 1, 2)"
 	}
 )
 
-quiz.append(q5)
+wand_quiz.append(q5)

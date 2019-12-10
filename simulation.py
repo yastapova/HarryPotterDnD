@@ -1,20 +1,20 @@
 import itertools
 from collections import Counter
 
-from wand_quiz import quiz, wand_cores, wand_flex, unique_woods
-from take_wand_quiz import summarize_answers
+from wand_quiz import wand_quiz, wand_cores, wand_flex, unique_woods
+from take_wand_quiz import summarize_wand
 
 wand_flex_list = wand_flex[1] + wand_flex[2] + wand_flex[3]
 
 
 def create_answer_sheets():
-    last_question = quiz[-1]
+    last_question = wand_quiz[-1]
     ans = list(last_question.answers.keys())
 
     last_combos = itertools.combinations(ans, 2)
     # print(list(last_combos))
 
-    question_combos = itertools.product(list(quiz[0].answers.keys()), list(quiz[1].answers.keys()), list(quiz[2].answers.keys()), list(quiz[3].answers.keys()))
+    question_combos = itertools.product(list(wand_quiz[0].answers.keys()), list(wand_quiz[1].answers.keys()), list(wand_quiz[2].answers.keys()), list(wand_quiz[3].answers.keys()))
     question_combos = itertools.product(question_combos, last_combos)
 
     combo_list = list(question_combos)
@@ -31,7 +31,7 @@ def count_results(combo_list):
     combo_list = [x + [",".join(y)] for x, y in combo_list]
 
     for combo in combo_list:
-        flex, step, flexes, best, core, wood_dict = summarize_answers(combo)
+        flex, step, flexes, best, core, wood_dict = summarize_wand(combo)
 
         # count flexibilities
         results_flex[best] += 1
