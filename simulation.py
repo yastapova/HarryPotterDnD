@@ -1,13 +1,16 @@
 import itertools
+import argparse
 from collections import Counter
 
 from wand_quiz import wand_quiz, wand_cores, wand_flex, unique_woods
-from take_quiz import summarize_wand
+from sorting_quiz import sort_quiz, houses
+from take_quiz import summarize_wand, summarize_house
 
+# region Wands
 wand_flex_list = wand_flex[1] + wand_flex[2] + wand_flex[3]
 
 
-def create_answer_sheets():
+def create_answer_sheets_wands():
     last_question = wand_quiz[-1]
     ans = list(last_question.answers.keys())
 
@@ -19,10 +22,10 @@ def create_answer_sheets():
 
     combo_list = list(question_combos)
 
-    return(combo_list)
+    return combo_list
 
 
-def count_results(combo_list):
+def count_results_wands(combo_list):
     results_flex = dict.fromkeys(wand_flex_list, 0)
     results_cores = dict.fromkeys(["TIE", "Unicorn Hair", "Dragon Heartstring", "Phoenix Feather"], 0)
     results_woods = dict.fromkeys(["TIE"] + unique_woods, 0)
@@ -40,7 +43,7 @@ def count_results(combo_list):
         temp_cores = dict(zip(wand_cores, core))
         temp_cores = Counter(temp_cores)
         temp_cores = temp_cores.most_common()
-        if(temp_cores[0][1] == temp_cores[1][1]):
+        if temp_cores[0][1] == temp_cores[1][1]:
             results_cores["TIE"] += 1
         else:
             results_cores[temp_cores[0][0]] += 1
@@ -48,15 +51,15 @@ def count_results(combo_list):
         # count woods
         temp_woods = Counter(wood_dict)
         temp_woods = temp_woods.most_common()
-        if(temp_woods[0][1] == temp_woods[1][1]):
+        if temp_woods[0][1] == temp_woods[1][1]:
             results_woods["TIE"] += 1
         else:
             results_woods[temp_woods[0][0]] += 1
 
-    return(results_flex, results_cores, results_woods)
+    return results_flex, results_cores, results_woods
 
 
-def print_results(flex_result, core_result, wood_result, n):
+def print_results_wands(flex_result, core_result, wood_result, n):
     print("\nSIMULATION RESULTS\n")
     print("-------------------------------------------")
     print("Wand Core Results")
@@ -79,6 +82,51 @@ def print_results(flex_result, core_result, wood_result, n):
         print("{0}: {1}, {2:2.2f}%".format(k, wood_result[k], wood_result[k] / n * 100))
 
 
-combo_list = create_answer_sheets()
-flex_result, core_result, wood_result = count_results(combo_list)
-print_results(flex_result, core_result, wood_result, len(combo_list))
+def simulate_wands():
+    combo_list = create_answer_sheets_wands()
+    flex_result, core_result, wood_result = count_results_wands(combo_list)
+    print_results_wands(flex_result, core_result, wood_result, len(combo_list))
+# endregion
+
+
+def create_answer_sheets_sorting():
+    q1 = sort_quiz[0]
+    ans1 = list(q1.answers.keys())
+    q2 = sort_quiz[1]
+    ans2 = list(q2.answers.keys())
+
+    combos = itertools.product(ans1, ans2)
+    combos = list(combos)
+
+    for q in range(2, len(sort_quiz)):
+        ans = list(sort_quiz[q].answers.keys())
+        combos = itertools.product(combos, ans)
+        combos = list(combos)
+        combos = [c1 + (c2,) for c1, c2 in combos]
+
+    combos = list(combos)
+
+    return combos
+
+
+def count_results_sorting(combo_list):
+    results_houses = dict.fromkeys(["TIE"] + houses, 0)
+
+    return results_houses
+
+
+def simulate_sorting():
+    combo_list = create_answer_sheets_sorting()
+    houses_result = count_results_sorting(combo_list)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-q", "--quiz", help="choose quiz to simulate: wand or sorting", action="store")
+
+    args = parser.parse_args()
+
+    if args.quiz == "wand":
+        simulate_wands()
+    elif args.quiz == "sorting":
+        simulate_sorting()
